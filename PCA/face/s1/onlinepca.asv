@@ -1,0 +1,57 @@
+clear all;
+N_folder=1;
+N_pic=10;
+image_N=112*92;
+vector_N=7;
+
+cd 'F:\课程资料\人脸和声音\face\s1'
+for i=1:N_folder
+    for j=1:N_pic 
+    filename = ['F:\课程资料\人脸和声音\face\s' int2str(i) '\' int2str(j) '.bmp'];
+    image = double(imread(filename,'bmp'));
+    %imshow(image)
+    sample(:,(i-1)*N_pic+j)=image(:);
+    end
+end
+sample_N=N_folder*N_pic;
+avg_img=mean(sample,2);
+for i=1:sample_N
+    X(:,i)=sample(:,i)-avg_img;
+end
+%X=sample;
+w=rand(1,image_N);
+yita=0.1;
+
+S=ones(1,image_N);
+while norm(S)<1
+    y=w*X;
+    S=zeros(1,image_N);
+    for l=1:sample_N
+        S=S+y(l).*X(:,l).'-y(l)^2.*w
+    end
+    w=w+yita*S;
+end    
+
+[U1,D]=eig(X.'*X);
+%U1=X.'\U;
+
+D1=diag(D);
+[x,idx] = sort(-D1);
+
+for i=1:vector_N
+    a=sqrt(D1(idx(i)));
+    b=norm(X*U1(:,idx(i)));
+    U(:,i)=X*U1(:,idx(i))/a;%/norm(X*U1(:,idx(i)))
+    U_t(:,i)=X*U1(:,idx(i))/b;
+end
+test1=U*(U'*X(:,6));
+test3=U_t*(U_t'*X(:,3));
+test2=test1+avg_img;
+test4=test3+avg_img;
+%test=test+(image_N-vector_N).*avg_img;
+
+%imview(uint8(reshape(test1,112,92)))
+%imview(uint8(reshape(test3,112,92)))
+%imview(uint8(reshape(test4,112,92)))
+imshow(uint8(reshape(test2,112,92)))
+
