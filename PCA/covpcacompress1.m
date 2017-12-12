@@ -11,15 +11,18 @@ for i = 1:10
     pic = reshape(pic,1,112*92);
     Xp(i,:) = pic;
 end
-[Xh,Yh,u] = nothingsconpca(Xp,5);
+[Xh,Yh,u] = nothingsconpca(Xp,6);
 
 Out = zeros(112,92,10);
-Out = uint()
+
 for i = 1:10
 pic = Xh(i,:);
 pic = reshape(pic,112,92);
 Out(:,:,i) = pic;
 pic = im2uint8(pic);
+if ~exist('compress1/s3/')
+    mkdir('compress1/s3/')
+end
 picpath = ['compress1/s3/',num2str(i),'.bmp']
 imwrite(pic,picpath);
 end
