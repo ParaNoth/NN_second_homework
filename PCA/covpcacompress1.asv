@@ -12,13 +12,11 @@ for i = 1:10
     Xp(i,:) = pic;
 end
 [Xh,Yh,u] = nothingsconpca(Xp,5);
-
-Out = zeros(112,92,10);
-Out = uint()
+h);
+Out = reshape(Xh1,[112 92 10]);
 for i = 1:10
 pic = Xh(i,:);
 pic = reshape(pic,112,92);
-Out(:,:,i) = pic;
 pic = im2uint8(pic);
 picpath = ['compress1/s3/',num2str(i),'.bmp']
 imwrite(pic,picpath);
