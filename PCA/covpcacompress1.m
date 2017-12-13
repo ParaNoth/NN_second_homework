@@ -1,9 +1,10 @@
 clc;
 clear;
 %%读取图片，产生样本
-Xp = zeros(10,112*92);
+Xp = zeros(112*92,10);
 In = zeros(112,92,10);
-for j = 1:40
+%for j = 1:40
+j=1;
     picdir = ['face/s',num2str(j),'/'];
     outdir = ['compress1/s',num2str(j),'/'];
 for i = 1:10
@@ -34,4 +35,4 @@ for i = 1:4
     subplot(2,4,2*i);imshow(Out(:,:,i));
 end
 psnr=PSNR(Xp,Xh)
-end
+%end
