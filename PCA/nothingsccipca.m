@@ -1,4 +1,4 @@
-function [ Xh, V ] = nothingsccipca( Xp, m )
+function [ Xh,Yp ,V ] = nothingsccipca( Xp, m )
 % CCIPCA算法
 % Xp - 图像样本矩阵n*N，每一列为一个样本,N为样本个数
 % m - CCIPCA主元个数
