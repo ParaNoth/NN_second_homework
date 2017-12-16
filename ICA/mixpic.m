@@ -1,0 +1,19 @@
+clc;
+clear;
+rawpic = [];
+path1 = '�羰ͼ/';
+picnum = randperm(4);
+for i = 1:3
+    picpath = [path1,num2str(picnum(i)),'.bmp'];
+    pic = imread(picpath);
+    pic = im2double(pic);
+    pic = pic(:)';
+    rawpic = [rawpic;pic];
+end
+mixmatrix = [0.3 0.2 0.5;0.7 0.2 0.1;0.2 0.5 0.2];
+picmix = mixmatrix*rawpic;
+
+
+[M,Z]=nothingswhiteningmatrix(picmix);
+
+s = nothingshjica(picmix);
