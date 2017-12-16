@@ -24,7 +24,7 @@ for i = 1:3
     if ~exist(outpath)
         mkdir(outpath);
     end
-    picpath = [outpath,num2str(picnum(i)),'.bmp'];
+    picpath = [outpath,num2str(i),'.bmp'];
     pic = s(i,:);
     pic = pic - min(pic);
     pic = pic./max(pic);
