@@ -1,18 +1,27 @@
 function [ M,Z ] = nothingswhiteningmatrix( X )
 %输入样本X，输出M为白化矩阵
 %   X为观测样本，一行为一个样本。
-noise = 0;
-X = X';
-x1 = X - mean(X);
-Cx = cov(x1);
-[V D] = eig(Cx);
-D1 = diag(D);
-[newd, ix] = sort(D1, 'descend');
-V = V(:,ix);
-D1 = D1(ix);
-n = size(find(diag(D)>noise));
-V = V(:,1:n);
-M = diag(1./sqrt(D1(1:n)))*V';
-Z = M * X';
+[~,col_size]=size(X);
+
+%白化处理
+MeanX=mean(X,2);
+X=X-MeanX;
+CorrX = (X * X')/col_size;
+[U,lambda]=eig(CorrX);
+
+% 白化矩阵
+[lambda,I]=sort(diag(lambda),'descend');
+U=U(:,I);
+lambda=lambda';
+lambda=lambda(abs(lambda)>1e-4);
+
+% 源的个数为n
+[~,n]=size(lambda);
+U=U(:,1:n);
+
+lambda=lambda.^(-0.5);
+M=diag(lambda) * U';
+Z=M*X;
+
 end
 
