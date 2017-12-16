@@ -31,7 +31,6 @@ for i = 1:3
     pic = pic./max(pic);
     pic = reshape(pic,256,512);
     pic = im2uint8(pic);
-    pic = histeq(pic);
     pics(:,:,i) = pic;
     imwrite(pic,picpath);
 end
