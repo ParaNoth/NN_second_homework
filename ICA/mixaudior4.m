@@ -2,7 +2,7 @@ clc;
 clear;
 audiobuffer = [];
 path1 = 'voice/';
-outpath = 'result/audio3-3/hj/';
+outpath = 'result/audio3-3/r4/';
 
 aa = dir(path1);
 [n,~]=size(aa);
@@ -27,7 +27,7 @@ audiomix = mixmatrix*audiobuffer;
 
 
 
-s = nothingshjica(audiomix);
+s = nothingsr4ica(audiomix);
 for i = 1:3
     if ~exist(outpath)
         mkdir(outpath);
