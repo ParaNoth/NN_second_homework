@@ -11,7 +11,7 @@ maxiter = 10000;
 e = 1e-5;
 for i = 1:maxiter
     y = (eye(numx) + w)\x;
-    dw = eta.*(eye(numx) - (y.^3)*(y)');
+    dw = eta.*((y.^3)*(y.^3)');
     w = w + dw;
     w = w - diag(diag(w)) + eye(numx);
     if(max(abs(dw)) < e)
