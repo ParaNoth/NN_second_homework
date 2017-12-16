@@ -18,7 +18,7 @@ picmix = mixmatrix*rawpic;
 
 [M,Z]=nothingswhiteningmatrix(picmix);
 
-s = nothingshjica(picmix);
+s = nothingshjica(Z);
 pics = zeros(256,512,3);
 for i = 1:3
     if ~exist(outpath)

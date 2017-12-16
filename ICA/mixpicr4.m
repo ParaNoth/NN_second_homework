@@ -2,7 +2,7 @@ clc;
 clear;
 rawpic = [];
 path1 = '�羰ͼ/';
-outpath = 'result/3-3/r4/';
+outpath = 'result/4-3/r4/';
 picnum = randperm(4);
 %picnum = [1 2 3];
 for i = 1:3
@@ -12,7 +12,7 @@ for i = 1:3
     pic = pic(:)';
     rawpic = [rawpic;pic];
 end
-mixmatrix = rand(3,3);
+mixmatrix = rand(4,3);
 mixmatrix = mixmatrix./sum(mixmatrix);
 picmix = mixmatrix*rawpic;
 
