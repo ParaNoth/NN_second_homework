@@ -2,7 +2,7 @@ clc;
 clear;
 audiobuffer = [];
 path1 = 'voice/';
-outpath = 'result/audio3-3/r4/';
+outpath = 'result/audio4-3/r4/';
 
 aa = dir(path1);
 [n,~]=size(aa);
@@ -21,7 +21,7 @@ for i = 1:3
     FSbuffer(i) = FS;
     audiobuffer = [audiobuffer;audio'];
 end
-mixmatrix = rand(3,3);
+mixmatrix = rand(4,3);
 mixmatrix = mixmatrix./sum(mixmatrix);
 audiomix = mixmatrix*audiobuffer;
 
