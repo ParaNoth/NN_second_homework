@@ -3,7 +3,10 @@ clear;
 %%读取图片，产生样本
 Xp = zeros(112*92,10);
 In = zeros(112,92,10);
-for j = 1:40
+%for j = 1:40
+psnrbuffer = [5:9];
+for k = 5:9
+j=1;
     picdir = ['face/s',num2str(j),'/'];
     outdir = ['compress2/s',num2str(j),'/'];
 for i = 1:10
@@ -14,7 +17,7 @@ for i = 1:10
     pic = reshape(pic,112*92,1);
     Xp(:,i) = pic;
 end
-[Xh,v] = nothingsccipca(Xp,7);
+[Xh,v] = nothingsccipca(Xp,k);
 
 Out = zeros(112,92,10);
 for i = 1:10
@@ -32,5 +35,8 @@ for i = 1:4
     subplot(2,4,2*i-1);imshow(In(:,:,i));
     subplot(2,4,2*i);imshow(Out(:,:,i));
 end
-psnr = PSNR(Xp,Xh)
+Xp1 = im2uint8(Xp);
+Xh1 = im2uint8(Xh);
+psnr=PSNR(Xp1,Xh1)
+psnrbuffer(k-4) = psnr;
 end
