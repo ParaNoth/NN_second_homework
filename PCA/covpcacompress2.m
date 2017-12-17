@@ -4,8 +4,8 @@ clear;
 Xp = zeros(112*92,10);
 In = zeros(112,92,10);
 %for j = 1:40
-psnrbuffer = [5:9];
-for k = 5:9
+psnrbuffer = [1:9];
+for k = 1:9
 j=1;
     picdir = ['face/s',num2str(j),'/'];
     outdir = ['compress2/s',num2str(j),'/'];
@@ -31,6 +31,7 @@ end
 picpath = [outdir,num2str(i),'.bmp'];
 imwrite(pic,picpath);
 end
+figure;
 for i = 1:4
     subplot(2,4,2*i-1);imshow(In(:,:,i));
     subplot(2,4,2*i);imshow(Out(:,:,i));
@@ -38,5 +39,5 @@ end
 Xp1 = im2uint8(Xp);
 Xh1 = im2uint8(Xh);
 psnr=PSNR(Xp1,Xh1)
-psnrbuffer(k-4) = psnr;
+psnrbuffer(k) = psnr;
 end

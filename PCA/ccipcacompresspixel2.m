@@ -4,8 +4,8 @@ clear;
 Xp = zeros(10,112*92);
 In = zeros(112,92,10);
 %for j = 1:40
-pcanum = [5,6,7,8,9,9];
-for k = 1:5
+pcanum = [1,2,3,4,5,6,7,8,9];
+for k = 1:9
 j=1
     picdir = ['face/s',num2str(j),'/'];
     outdir = ['compress1pix/s',num2str(j),'/'];
@@ -32,6 +32,7 @@ end
 picpath = [outdir,num2str(i),'.bmp']
 imwrite(pic,picpath);
 end
+figure;
 for i = 1:4
     subplot(2,4,2*i-1);imshow(In(:,:,i));
     subplot(2,4,2*i);imshow(Out(:,:,i));

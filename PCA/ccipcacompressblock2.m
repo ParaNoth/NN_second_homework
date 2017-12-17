@@ -5,9 +5,9 @@ clear;
 
 In = zeros(112,92,10);
 %for j = 1:40
-psnrbuffer = [5:9];
-pcanum = [50,60,70,80,90,95];
-for k = 1:6
+psnrbuffer = [1:11];
+pcanum = [5,10,20,30,40,50,60,70,80,90,95];
+for k = 1:11
     Xp = [];
     j=1;
     picdir = ['face/s',num2str(j),'/'];
@@ -34,6 +34,7 @@ end
 picpath = [outdir,num2str(i),'.bmp'];
 imwrite(pic,picpath);
 end
+figure;
 for i = 1:4
     subplot(2,4,2*i-1);imshow(In(:,:,i));
     subplot(2,4,2*i);imshow(Out(:,:,i));
