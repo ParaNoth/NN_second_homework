@@ -1,11 +1,13 @@
 clc;
 clear;
+load 400pic15pca
 load 400picsvm.mat
-pcanum = [2,5,7,10,15,20,25,30,40,50,60,80];
-Trainingerror=[1:10];
-Testingerror =[1:10];
-for i=1:12
-[Xh,Yp,V] = nothingsconpca(Xp,pcanum(i));
+pcanum = [2,5,7,10,15,20,25,30,40,50,60,80,150,200,500];
+Trainingerror=[1:15];
+Testingerror =[1:15];
+for i=1:15
+%[Xh,Yp,V] = nothingsconpca(Xp,pcanum(i));
+Yp = Y{i}
 TrainingIndex = [1:2:400];
 TestingIndex = [2:2:400];
 
@@ -20,3 +22,9 @@ svm40pic = svmtrain2(Dp',Train','-s 0 -t 2');
 testloss = (100-accuracy(1))*2;
 Testingerror(i) = testloss;
 end
+hold on,plot(pcanum,Testingerror,'d-');
+title('SVMloss情况');
+xlabel('主元数');
+ylabel('loss');
+legend('testloss');
+grid;
