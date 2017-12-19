@@ -2,7 +2,7 @@ clc;
 clear;
 rawpic = [];
 path1 = '�羰ͼ/';
-outpath = 'result/3-3/r4/';
+outpath = 'result/3-3/maxh/';
 picnum = randperm(4);
 %picnum = [1 2 3];
 for i = 1:3
@@ -15,6 +15,8 @@ end
 mixmatrix = rand(3,3)';
 mixmatrix = (mixmatrix./sum(mixmatrix))';
 picmix = mixmatrix*rawpic;
+[M,Z] = nothingswhiteningmatrix(picmix);
+
 for i = 1:3
     if ~exist(outpath)
         mkdir(outpath);
@@ -24,7 +26,8 @@ for i = 1:3
     pic = reshape(pic,256,512);
     imwrite(pic,picpath);
 end
-s = nothingsr4ica(picmix);
+
+s = nothingsmaxhica(Z);
 for i = 1:3
     if ~exist(outpath)
         mkdir(outpath);
