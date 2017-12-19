@@ -12,12 +12,18 @@ for i = 1:3
     pic = pic(:)';
     rawpic = [rawpic;pic];
 end
-mixmatrix = rand(4,3);
-mixmatrix = mixmatrix./sum(mixmatrix);
+mixmatrix = rand(4,3)';
+mixmatrix = (mixmatrix./sum(mixmatrix))';
 picmix = mixmatrix*rawpic;
-
-
-
+for i = 1:4
+    if ~exist(outpath)
+        mkdir(outpath);
+    end
+    picpath = [outpath,'mix',num2str(i),'.bmp'];
+    pic = picmix(i,:);
+    pic = reshape(pic,256,512);
+    imwrite(pic,picpath);
+end
 s = nothingsr4ica(picmix);
 for i = 1:3
     if ~exist(outpath)

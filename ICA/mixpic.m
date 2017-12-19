@@ -2,9 +2,9 @@ clc;
 clear;
 rawpic = [];
 path1 = '�羰ͼ/';
-outpath = 'result/4-3/hj/';
-picnum = randperm(4);
-%picnum = [1,2,4];
+outpath = 'result/3-3/hj/';
+%picnum = randperm(4);
+picnum = [1,2,4];
 for i = 1:3
     picpath = [path1,num2str(picnum(i)),'.bmp'];
     pic = imread(picpath);
@@ -12,14 +12,22 @@ for i = 1:3
     pic = pic(:)';
     rawpic = [rawpic;pic];
 end
-mixmatrix = rand(4,3);
-mixmatrix = mixmatrix./sum(mixmatrix);
+mixmatrix = rand(3,3)';
+mixmatrix = (mixmatrix./sum(mixmatrix))';
 picmix = mixmatrix*rawpic;
 
-
+for i = 1:3
+    if ~exist(outpath)
+        mkdir(outpath);
+    end
+    picpath = [outpath,'mix',num2str(i),'.bmp'];
+    pic = picmix(i,:);
+    pic = reshape(pic,256,512);
+    imwrite(pic,picpath);
+end
 [M,Z]=nothingswhiteningmatrix(picmix);
-
-s = nothingshjica(Z);
+a = rank(Z);
+s = nothingshjica(picmix(1:a,:));
 pics = zeros(256,512,3);
 for i = 1:3
     if ~exist(outpath)

@@ -21,8 +21,8 @@ for i = 1:3
     FSbuffer(i) = FS;
     audiobuffer = [audiobuffer;audio'];
 end
-mixmatrix = rand(4,3);
-mixmatrix = mixmatrix./sum(mixmatrix);
+mixmatrix = rand(4,3)';
+mixmatrix = (mixmatrix./sum(mixmatrix))';
 
 audiomix = mixmatrix*audiobuffer;
 for i = 1:4
