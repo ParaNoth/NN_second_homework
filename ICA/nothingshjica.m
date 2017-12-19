@@ -4,17 +4,18 @@ function [ s ] = nothingshjica( x )
 [numx,~] = size(x);
 
 w = rand(numx,numx);
-w = diag(diag(w)) + eye(numx);
+w = w - diag(diag(w)) + eye(numx);
 
-eta = 0.001;
-maxiter = 100000;
-e = 1e-5;
+eta = 0.0001;
+maxiter = 20000;
+e = 1e-7;
 for i = 1:maxiter
     y = (eye(numx) + w)\x;
-    dw = ((y.^3)*(y.^3)');
+    dw = (eye(numx)-(y.^3)*(y)');
+    %dw = (y.^3)*(y.^3)';
     w = w + eta.*dw;
     w = w - diag(diag(w)) + eye(numx);
-    if(max(abs(dw)) < e)
+    if(max(abs(dw-diag(diag(dw)))) < e)
         break;
     end
 end

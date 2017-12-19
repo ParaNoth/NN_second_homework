@@ -2,7 +2,7 @@ clc;
 clear;
 rawpic = [];
 path1 = '�羰ͼ/';
-outpath = 'result/3-3/hj/';
+outpath = 'result/5-3/hj/';
 %picnum = randperm(4);
 picnum = [1,2,4];
 for i = 1:3
@@ -40,5 +40,16 @@ for i = 1:3
     pic = reshape(pic,256,512);
     pic = im2uint8(pic);
     pics(:,:,i) = pic;
+    imwrite(pic,picpath);
+end
+for i = 4:6
+    if ~exist(outpath)
+        mkdir(outpath);
+    end
+    picpath = [outpath,num2str(i),'.bmp'];
+    pic = s(i-3,:);
+    pic = pic - min(pic);
+    pic = 1-pic./max(pic);
+    pic = reshape(pic,256,512);
     imwrite(pic,picpath);
 end
